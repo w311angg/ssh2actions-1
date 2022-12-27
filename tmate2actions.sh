@@ -27,6 +27,7 @@ CONTINUE_FILE="/tmp/continue"
 echo -e "${INFO} Setting up tmate ..."
 if [[ -n "$(uname | grep Linux)" ]]; then
     curl -fsSL git.io/tmate.sh > /tmp/tmate.sh
+    cd /
     patch << EOF
 --- /tmp/tmate.sh	2022-12-28 03:24:04.614847752 +0800
 +++ /tmp/tmate.sh	2022-12-28 03:25:26.154847721 +0800
@@ -40,6 +41,7 @@ if [[ -n "$(uname | grep Linux)" ]]; then
      echo -e "${ERROR} Unable to check the version, network failure or API error."
      exit 1
 EOF
+    cd -
     cat /tmp/tmate.sh | bash
 elif [[ -x "$(command -v brew)" ]]; then
     brew install tmate
