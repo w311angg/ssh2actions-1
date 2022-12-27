@@ -26,7 +26,21 @@ CONTINUE_FILE="/tmp/continue"
 # Install tmate on macOS or Ubuntu
 echo -e "${INFO} Setting up tmate ..."
 if [[ -n "$(uname | grep Linux)" ]]; then
-    curl -fsSL git.io/tmate.sh | bash
+    curl -fsSL git.io/tmate.sh > /tmp/tmate.sh
+    patch -p0 << EOF
+--- /tmp/tmate.sh	2022-12-28 03:24:04.614847752 +0800
++++ /tmp/tmate.sh	2022-12-28 03:25:26.154847721 +0800
+@@ -50,7 +50,7 @@ else
+ fi
+ 
+ echo -e "${INFO} Check the version of tmate ..."
+-tmate_ver=$(curl -fsSL https://api.github.com/repos/tmate-io/tmate/releases | grep -o '"tag_name": ".*"' | head -n 1 | sed 's/"//g;s/v//g' | sed 's/tag_name: //g')
++tmate_ver=$(curl -fsSL https://api.github.com/repos/tmate-io/tmate/releases -u "username:$GITHUB_TOKEN" | grep -o '"tag_name": ".*"' | head -n 1 | sed 's/"//g;s/v//g' | sed 's/tag_name: //g')
+ [ -z $tmate_ver ] && {
+     echo -e "${ERROR} Unable to check the version, network failure or API error."
+     exit 1
+EOF
+    cat /tmp/tmate.sh | bash
 elif [[ -x "$(command -v brew)" ]]; then
     brew install tmate
 else
