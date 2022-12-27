@@ -41,7 +41,7 @@ if [[ -n "$(uname | grep Linux)" ]]; then
      echo -e "${ERROR} Unable to check the version, network failure or API error."
      exit 1
 EOF
-    cd -
+    cd - 1>/dev/null
     cat /tmp/tmate.sh | bash
 elif [[ -x "$(command -v brew)" ]]; then
     brew install tmate
