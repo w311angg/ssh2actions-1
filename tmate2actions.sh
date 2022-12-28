@@ -26,7 +26,7 @@ CONTINUE_FILE="/tmp/continue"
 # Install tmate on macOS or Ubuntu
 echo -e "${INFO} Setting up tmate ..."
 if [[ -n "$(uname | grep Linux)" ]]; then
-    curl -fsSL -O /tmp/tmate.sh git.io/tmate.sh
+    curl -fsSL -o /tmp/tmate.sh git.io/tmate.sh
     cd /
     patch << EOF
 --- /tmp/tmate.sh	2022-12-28 03:24:04.614847752 +0800
