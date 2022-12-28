@@ -28,7 +28,7 @@ echo -e "${INFO} Setting up tmate ..."
 if [[ -n "$(uname | grep Linux)" ]]; then
     curl -fsSL -o /tmp/tmate.sh git.io/tmate.sh
     cd /
-    patch -p0 << EOF
+    patch -p0 <<'EOF'
 --- /tmp/tmate.sh	2022-12-28 03:24:04.614847752 +0800
 +++ /tmp/tmate.sh	2022-12-28 03:25:26.154847721 +0800
 @@ -50,7 +50,7 @@ else
